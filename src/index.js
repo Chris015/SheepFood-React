@@ -20,44 +20,7 @@ class App extends React.Component {
     constructor() {
         super();
         this.state = {
-            recipes: [
-                {
-                    title: '',
-                    description: '',
-                    imageUrl: '',
-                    recipeItems: [
-                        {
-                            id: null,
-                            ingredient: {name: ''},
-                            amount: null,
-                            unit: {name: ""}
-                        }
-                    ]
-
-                }
-            ],
-            mockRecipes: [
-                {
-                    title: 'Title',
-                    description: 'Description',
-                    imageUrl: 'img_url',
-                    recipeItems: [
-                        {
-                            id: 1,
-                            ingredient: {name: 'Mjöl'},
-                            amount: 3,
-                            unit: {name: "dl"}
-                        },
-                        {
-                            id: 2,
-                            ingredient: {name: 'Salt'},
-                            amount: 2,
-                            unit: {name: "krm"}
-                        }
-                    ]
-
-                }
-            ]
+            recipes: undefined
         };
     }
 
@@ -68,10 +31,8 @@ class App extends React.Component {
             );
     }
 
-    render() {
-        console.log(this.state.recipes);
-
-        const recipes = this.state.recipes.map((recipe) =>
+    generateRecipesJsx() {
+        return this.state.recipes.map((recipe) =>
             <div>
                 <h2>{recipe.title}</h2>
                 <img src={recipe.imageUrl} alt={recipe.title}/>
@@ -85,14 +46,23 @@ class App extends React.Component {
             </div>
         );
 
-
-        return (
-            <div>
-                <h1>Hello World!</h1>
-                {recipes}
-            </div>
-        )
     }
+
+    render() {
+        if (!this.state.recipes) {
+            return <div className="loader"></div>
+        } else {
+            const recipes = this.generateRecipesJsx();
+            return (
+                <div>
+                    <h1>Sheep Food</h1>
+                    {recipes}
+                </div>
+            )
+        }
+    }
+
+
 }
 
 ReactDOM.render(<App />, document.getElementById('root'));
