@@ -41,7 +41,7 @@ class App extends React.Component {
                     recipe.recipeItems.map((item) =>
                         <li>{item.ingredient.name} {item.amount} {item.unit.name}</li>)
                 }
-                <h3>Insruktioner</h3>
+                <h3>Instruktioner</h3>
                 <p>{recipe.description}</p>
             </div>
         );
