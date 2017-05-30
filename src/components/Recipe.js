@@ -22,7 +22,7 @@ export default function Recipe(props) {
             <h3>Ingredienser</h3>
             {
                 props.recipe.recipeItems.map((item) =>
-                    <li>{item.ingredient.name} {item.amount} {item.unit.name}</li>)
+                    <li>{item.amount} {item.unit.name} {item.ingredient.name.toLowerCase()}</li>)
             }
             <h3>Instruktioner</h3>
             <p>{props.recipe.description}</p>

@@ -44,7 +44,7 @@ class App extends React.Component {
                 <h1>Sheep Food</h1>
                 {
                     this.state.recipes.map((recipe) =>
-                        <Recipe recipe={recipe} detailsOnly={true}/>
+                        <Recipe recipe={recipe} detailsOnly={false}/>
                     )
                 }
             </div>
