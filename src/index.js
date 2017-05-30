@@ -30,7 +30,10 @@ class App extends React.Component {
     fetchAllRecipes() {
         axios.get('http://sheepfood.azurewebsites.net/recipes.json')
             .then(
-                response => this.setState({recipes: response.data})
+                response => this.setState({
+                    detailsOnly: true,
+                    recipes: response.data
+                })
             );
     }
 
@@ -54,11 +57,9 @@ class App extends React.Component {
     }
 
     handleViewFullRecipe(recipe) {
-        console.log("HANDLE FULL VIEW");
-        console.log(recipe);
         this.setState({detailsOnly: false});
-        const full = [recipe];
-        this.setState({recipes: full})
+        const singleRecipe = [recipe];
+        this.setState({recipes: singleRecipe})
     }
 
 
