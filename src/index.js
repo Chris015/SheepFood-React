@@ -8,9 +8,9 @@ import NavBar from "./components/NavBar.js";
 
 /*
  TODO:
-  1. Meny
-  2. Söka efter recept
-  3. Klickbara recept som visar hela receptet
+ 1. Meny
+ 2. Söka efter recept
+ 3. Klickbara recept som visar hela receptet
  */
 
 class App extends React.Component {
@@ -23,9 +23,17 @@ class App extends React.Component {
     }
 
     componentDidMount() {
-        axios.get(`http://sheepfood.azurewebsites.net/recipes.json`)
+        axios.get('http://sheepfood.azurewebsites.net/recipes.json')
             .then(
                 response => this.setState({recipes: response.data})
+            );
+    }
+
+    handleSearch(evt) {
+        axios.get('http://sheepfood.azurewebsites.net/recipes?q=' + evt.target.value)
+            .then(
+                response =>
+                    this.setState({recipes: response.data})
             );
     }
 
@@ -40,12 +48,14 @@ class App extends React.Component {
             )
         }
 
+        console.log(this.state.recipes);
+
         return (
             <div>
-                <NavBar />
+                <NavBar onChange={this.handleSearch}/>
                 {
                     this.state.recipes.map((recipe) =>
-                        <Recipe recipe={recipe} detailsOnly={false}/>
+                        <Recipe recipe={recipe} detailsOnly={true}/>
                     )
                 }
             </div>

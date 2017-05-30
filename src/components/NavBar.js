@@ -11,12 +11,16 @@ export default function Recipe(props) {
                         <p className="navbar-brand">Sheep Food</p>
                     </div>
 
-                    <form className="navbar-form navbar-left">
+                    <div className="navbar-form navbar-left">
                         <div className="form-group">
-                            <input type="text" className="form-control" placeholder="Search" />
+                            <input
+                                id="searchInput"
+                                type="text"
+                                className="form-control"
+                                placeholder="Search"
+                                onChange={evt => props.onChange(evt)}/>
                         </div>
-                        <button type="submit" className="btn btn-default">Submit</button>
-                    </form>
+                    </div>
                 </div>
             </nav>
         </div>
