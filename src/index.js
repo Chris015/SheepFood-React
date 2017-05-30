@@ -45,7 +45,7 @@ class App extends React.Component {
                 <NavBar />
                 {
                     this.state.recipes.map((recipe) =>
-                        <Recipe recipe={recipe} detailsOnly={true}/>
+                        <Recipe recipe={recipe} detailsOnly={false}/>
                     )
                 }
             </div>
