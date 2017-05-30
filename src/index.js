@@ -24,6 +24,10 @@ class App extends React.Component {
     }
 
     componentDidMount() {
+        this.fetchAllRecipes();
+    }
+
+    fetchAllRecipes() {
         axios.get('http://sheepfood.azurewebsites.net/recipes.json')
             .then(
                 response => this.setState({recipes: response.data})
@@ -34,13 +38,19 @@ class App extends React.Component {
         axios.get('http://sheepfood.azurewebsites.net/recipes?q=' + evt.target.value)
             .then(
                 response => {
-                    this.setState({
-                        recipes: response.data,
-                        detailsOnly: true
-                    })
+                    if (response.status === 204) {
+                        this.setState({
+                            recipes: [],
+                            detailsOnly: true
+                        })
+                    } else {
+                        this.setState({
+                            recipes: response.data,
+                            detailsOnly: true
+                        })
+                    }
                 }
-            )
-        ;
+            );
     }
 
     handleViewFullRecipe(recipe) {
@@ -56,7 +66,9 @@ class App extends React.Component {
         if (!this.state.recipes) {
             return (
                 <div>
-                    <NavBar handleChange={this.handleSearch.bind(this)}/>
+                    <NavBar
+                        handleChange={this.handleSearch.bind(this)}
+                        handleClick={this.fetchAllRecipes.bind(this)}/>
                     <div className="loader-content">
                         <div className="loader-icon"/>
                         <p>loading recipes...</p>
@@ -65,10 +77,25 @@ class App extends React.Component {
             )
         }
 
+        if(this.state.recipes.length === 0) {
+
+            return (
+                <div>
+                    <NavBar
+                        handleChange={this.handleSearch.bind(this)}
+                        handleClick={this.fetchAllRecipes.bind(this)}/>
+                    <p>Sad face</p>
+                </div>
+            )
+        }
+
         return (
             <div>
-                <NavBar handleChange={this.handleSearch.bind(this)}/>
+                <NavBar
+                    handleChange={this.handleSearch.bind(this)}
+                    handleClick={this.fetchAllRecipes.bind(this)}/>
                 {
+
                     this.state.recipes.map((recipe) =>
                         <Recipe
                             recipe={recipe}

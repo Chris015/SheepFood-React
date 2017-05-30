@@ -12,6 +12,7 @@ export default function Recipe(props) {
                 <img src={props.recipe.imageUrl} alt={props.recipe.title} />
                 <p>{shortDescription}</p>
             </div>
+
         )
     }
 
