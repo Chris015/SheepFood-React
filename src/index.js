@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import axios from "axios";
 import "./index.css";
 import Recipe from "./components/Recipe.js";
+import NavBar from "./components/NavBar.js";
 
 
 /*
@@ -41,7 +42,7 @@ class App extends React.Component {
 
         return (
             <div>
-                <h1>Sheep Food</h1>
+                <NavBar />
                 {
                     this.state.recipes.map((recipe) =>
                         <Recipe recipe={recipe} detailsOnly={true}/>
