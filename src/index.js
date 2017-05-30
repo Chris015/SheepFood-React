@@ -55,9 +55,12 @@ class App extends React.Component {
     render() {
         if (!this.state.recipes) {
             return (
-                <div className="loader-content">
-                    <div className="loader-icon"/>
-                    <p>loading recipes...</p>
+                <div>
+                    <NavBar handleChange={this.handleSearch.bind(this)}/>
+                    <div className="loader-content">
+                        <div className="loader-icon"/>
+                        <p>loading recipes...</p>
+                    </div>
                 </div>
             )
         }
