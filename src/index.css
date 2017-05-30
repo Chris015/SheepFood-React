@@ -4,7 +4,12 @@ body {
   font-family: sans-serif;
 }
 
-.loader {
+.loader-content {
+    margin-top: 10%;
+    text-align: center;
+}
+
+.loader-icon {
     vertical-align: middle;
     margin: 0 auto;
     border: 16px solid #f3f3f3; /* Light grey */
