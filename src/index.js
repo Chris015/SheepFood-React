@@ -84,7 +84,10 @@ class App extends React.Component {
                     <NavBar
                         handleChange={this.handleSearch.bind(this)}
                         handleClick={this.fetchAllRecipes.bind(this)}/>
-                    <p>Sad face</p>
+                    <div className="col-md-offset-5">
+                        <img src="http://cdn.toonvectors.com/images/2/19936/toonvectors-19936-140.jpg"/>
+                        <p>Vi hittade inga recept åt dig</p>
+                    </div>
                 </div>
             )
         }
