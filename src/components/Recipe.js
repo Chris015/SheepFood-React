@@ -7,9 +7,9 @@ export default function Recipe(props) {
     if (props.detailsOnly) {
         const shortDescription = props.recipe.description.substring(0, 100) + "...";
         return (
-            <div onClick={this.handleViewFullRecipe(props.recipe)}>
+            <div>
                 <h2>{props.recipe.title}</h2>
-                <img src={props.recipe.imageUrl} alt={props.recipe.title}/>
+                <img src={props.recipe.imageUrl} alt={props.recipe.title}  onClick={props.handleClick(props.recipe)}/>
                 <p>{shortDescription}</p>
             </div>
         )

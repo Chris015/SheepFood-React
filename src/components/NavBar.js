@@ -18,7 +18,7 @@ export default function Recipe(props) {
                                 type="text"
                                 className="form-control"
                                 placeholder="Search"
-                                onChange={evt => props.onChange(evt)}/>
+                                onChange={evt => props.handleChange(evt)}/>
                         </div>
                     </div>
                 </div>

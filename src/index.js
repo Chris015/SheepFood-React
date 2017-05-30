@@ -31,17 +31,18 @@ class App extends React.Component {
     }
 
     handleSearch(evt) {
+        console.log(this.state.recipes);
         axios.get('http://sheepfood.azurewebsites.net/recipes?q=' + evt.target.value)
             .then(
-                response =>
-                    this.setState({recipes: response.data})
+                response => this.setState({recipes: response.data}),
             );
     }
 
-    handleViewFullRecipe(recipe){
-        this.setState({detailsOnly:false});
-        const full= [recipe];
-        this.setState({recipe:full})
+    handleViewFullRecipe(evt){
+        console.log("hello");
+        // this.setState({detailsOnly:false});
+        // const full= [evt.target.recipe];
+        // this.setState({recipe:full})
     }
 
 
@@ -55,14 +56,15 @@ class App extends React.Component {
             )
         }
 
-        console.log(this.state.recipes);
-
         return (
             <div>
-                <NavBar onChange={this.handleSearch}/>
+                <NavBar handleChange={this.handleSearch.bind(this)}/>
                 {
                     this.state.recipes.map((recipe) =>
-                        <Recipe recipe={recipe} detailsOnly={this.state.detailsOnly}/>
+                        <Recipe
+                            recipe={recipe}
+                            detailsOnly={this.state.detailsOnly}
+                            handleClick={this.handleViewFullRecipe.bind(this)} />
                     )
                 }
             </div>
