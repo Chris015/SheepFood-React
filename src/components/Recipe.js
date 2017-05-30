@@ -7,9 +7,11 @@ export default function Recipe(props) {
     if (props.detailsOnly) {
         const shortDescription = props.recipe.description.substring(0, 100) + "...";
         return (
-            <div onClick={evt => props.handleClick(props.recipe)}>
+            <div className="col-md-offset-1" onClick={evt => props.handleClick(props.recipe)}>
                 <h2>{props.recipe.title}</h2>
-                <img src={props.recipe.imageUrl} alt={props.recipe.title} />
+
+                    <img src={props.recipe.imageUrl} alt={props.recipe.title} width={200} />
+
                 <p>{shortDescription}</p>
             </div>
 
@@ -17,7 +19,7 @@ export default function Recipe(props) {
     }
 
     return (
-        <div>
+        <div className="col-md-offset-1">
             <h2>{props.recipe.title}</h2>
             <img src={props.recipe.imageUrl} alt={props.recipe.title}/>
             <h3>Ingredienser</h3>
@@ -26,7 +28,9 @@ export default function Recipe(props) {
                     <li>{item.amount} {item.unit.name} {item.ingredient.name.toLowerCase()}</li>)
             }
             <h3>Instruktioner</h3>
-            <p>{props.recipe.description}</p>
+            <div className="col-md-5">
+                <p>{props.recipe.description}</p>
+            </div>
         </div>
     )
 }
