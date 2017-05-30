@@ -18,7 +18,8 @@ class App extends React.Component {
     constructor() {
         super();
         this.state = {
-            recipes: undefined
+            recipes: undefined,
+            detailsOnly: true
         };
     }
 
@@ -35,6 +36,12 @@ class App extends React.Component {
                 response =>
                     this.setState({recipes: response.data})
             );
+    }
+
+    handleViewFullRecipe(recipe){
+        this.setState({detailsOnly:false});
+        const full= [recipe];
+        this.setState({recipe:full})
     }
 
 
@@ -55,7 +62,7 @@ class App extends React.Component {
                 <NavBar onChange={this.handleSearch}/>
                 {
                     this.state.recipes.map((recipe) =>
-                        <Recipe recipe={recipe} detailsOnly={true}/>
+                        <Recipe recipe={recipe} detailsOnly={this.state.detailsOnly}/>
                     )
                 }
             </div>
