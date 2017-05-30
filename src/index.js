@@ -31,18 +31,24 @@ class App extends React.Component {
     }
 
     handleSearch(evt) {
-        console.log(this.state.recipes);
         axios.get('http://sheepfood.azurewebsites.net/recipes?q=' + evt.target.value)
             .then(
-                response => this.setState({recipes: response.data}),
-            );
+                response => {
+                    this.setState({
+                        recipes: response.data,
+                        detailsOnly: true
+                    })
+                }
+            )
+        ;
     }
 
-    handleViewFullRecipe(evt){
-        console.log("hello");
-        // this.setState({detailsOnly:false});
-        // const full= [evt.target.recipe];
-        // this.setState({recipe:full})
+    handleViewFullRecipe(recipe) {
+        console.log("HANDLE FULL VIEW");
+        console.log(recipe);
+        this.setState({detailsOnly: false});
+        const full = [recipe];
+        this.setState({recipes: full})
     }
 
 
@@ -64,7 +70,7 @@ class App extends React.Component {
                         <Recipe
                             recipe={recipe}
                             detailsOnly={this.state.detailsOnly}
-                            handleClick={this.handleViewFullRecipe.bind(this)} />
+                            handleClick={this.handleViewFullRecipe.bind(this)}/>
                     )
                 }
             </div>
