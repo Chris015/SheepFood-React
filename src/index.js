@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import axios from "axios";
+import {debounce} from 'throttle-debounce';
 import "./index.css";
 import Recipe from "./components/Recipe.js";
 import NavBar from "./components/NavBar.js";
@@ -17,6 +18,7 @@ class App extends React.Component {
 
     constructor() {
         super();
+        this.fetchRecipeBySearchString = debounce(300, this.fetchRecipeBySearchString);
         this.state = {
             recipes: undefined,
             detailsOnly: true
@@ -37,8 +39,8 @@ class App extends React.Component {
             );
     }
 
-    handleSearch(evt) {
-        axios.get('http://sheepfood.azurewebsites.net/recipes?q=' + evt.target.value)
+    fetchRecipeBySearchString(value) {
+        axios.get('http://sheepfood.azurewebsites.net/recipes?q=' + value)
             .then(
                 response => {
                     if (response.status === 204) {
@@ -54,6 +56,10 @@ class App extends React.Component {
                     }
                 }
             );
+    }
+
+    handleSearch(evt) {
+        this.fetchRecipeBySearchString(evt.target.value);
     }
 
     handleViewFullRecipe(recipe) {
@@ -78,7 +84,7 @@ class App extends React.Component {
             )
         }
 
-        if(this.state.recipes.length === 0) {
+        if (this.state.recipes.length === 0) {
 
             return (
                 <div>

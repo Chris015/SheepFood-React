@@ -7,10 +7,10 @@ export default function Recipe(props) {
     if (props.detailsOnly) {
         const shortDescription = props.recipe.description.substring(0, 100) + "...";
         return (
-            <div className="col-md-offset-1" onClick={evt => props.handleClick(props.recipe)}>
+            <div className="recipe-item" onClick={evt => props.handleClick(props.recipe)}>
                 <h2>{props.recipe.title}</h2>
 
-                    <img src={props.recipe.imageUrl} alt={props.recipe.title} width={200} />
+                <img src={props.recipe.imageUrl} alt={props.recipe.title}/>
 
                 <p>{shortDescription}</p>
             </div>
@@ -19,7 +19,7 @@ export default function Recipe(props) {
     }
 
     return (
-        <div className="col-md-offset-1">
+        <div className="recipe-item-detail">
             <h2>{props.recipe.title}</h2>
             <img src={props.recipe.imageUrl} alt={props.recipe.title}/>
             <h3>Ingredienser</h3>
